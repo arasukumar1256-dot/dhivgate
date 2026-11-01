@@ -1,1 +1,39 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Host Login</title><link rel="stylesheet" href="../css/style.css"></head><body><main class="container narrow"><section class="card"><h2>Host / Admin Login</h2><form id="loginForm"><label>Email<input id="email" type="email" required></label><label>Password<input id="password" type="password" required></label><button class="btn">Login</button></form><p id="message"></p><a href="../index.html">Home</a></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/config.js"></script><script src="../js/admin-auth.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Host Login</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<main class="container narrow">
+<section class="card">
+<h2>HOST LOGIN</h2>
+
+<form id="loginForm">
+<label>Host ID</label>
+<input id="loginId"
+       type="text"
+       placeholder="ADMIN001"
+       required>
+
+<label>Host Passcode</label>
+<input id="password"
+       type="password"
+       placeholder="Enter host passcode"
+       required>
+
+<button class="btn" type="submit">HOST LOGIN</button>
+</form>
+
+<p id="message"></p>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
+<script src="../js/admin-auth.js"></script>
+</body>
+</html>
