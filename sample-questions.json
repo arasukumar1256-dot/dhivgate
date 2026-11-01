@@ -1,0 +1,114 @@
+{
+  "questions": [
+    {
+      "question_id": "ECE_NT_000001",
+      "subject": "Network Theory",
+      "topic": "KCL",
+      "difficulty": "Easy",
+      "type": "MCQ",
+      "question": {
+        "text": "At a node, the algebraic sum of currents is equal to:",
+        "image": null
+      },
+      "options": [
+        {
+          "id": "A",
+          "text": "Zero"
+        },
+        {
+          "id": "B",
+          "text": "Resistance"
+        },
+        {
+          "id": "C",
+          "text": "Voltage"
+        },
+        {
+          "id": "D",
+          "text": "Power"
+        }
+      ],
+      "answer": [
+        "A"
+      ],
+      "solution": {
+        "text": "Kirchhoff's Current Law states that the algebraic sum of currents at a node is zero."
+      },
+      "marks": 1,
+      "negative_marks": 0.33,
+      "source": "Practice",
+      "year": null,
+      "tags": [
+        "KCL"
+      ]
+    },
+    {
+      "question_id": "ECE_ED_000001",
+      "subject": "Electronic Devices",
+      "topic": "PN Junction",
+      "difficulty": "Medium",
+      "type": "MSQ",
+      "question": {
+        "text": "Which statements about a reverse-biased ideal PN junction are correct?",
+        "image": null
+      },
+      "options": [
+        {
+          "id": "A",
+          "text": "Depletion width increases"
+        },
+        {
+          "id": "B",
+          "text": "Barrier potential increases"
+        },
+        {
+          "id": "C",
+          "text": "Majority carrier current increases substantially"
+        },
+        {
+          "id": "D",
+          "text": "Only a small reverse saturation current flows"
+        }
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "solution": {
+        "text": "Reverse bias widens the depletion region and increases the barrier."
+      },
+      "marks": 2,
+      "negative_marks": 0,
+      "source": "Practice",
+      "year": null,
+      "tags": [
+        "PN Junction"
+      ]
+    },
+    {
+      "question_id": "ECE_MATH_000001",
+      "subject": "Engineering Mathematics",
+      "topic": "Complex Numbers",
+      "difficulty": "Easy",
+      "type": "NAT",
+      "question": {
+        "text": "Find the magnitude of 3 + j4."
+      },
+      "options": [],
+      "answer": [
+        "5"
+      ],
+      "solution": {
+        "text": "Magnitude = sqrt(3^2 + 4^2) = 5."
+      },
+      "marks": 1,
+      "negative_marks": 0,
+      "source": "Practice",
+      "year": null,
+      "tags": [
+        "Complex Numbers"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+document.getElementById('analytics').textContent='Complete mock exams to build your performance history. This starter version stores the latest attempt in the browser session; connect the results table for persistent analytics.';

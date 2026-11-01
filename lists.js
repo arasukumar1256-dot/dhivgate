@@ -1,0 +1,1 @@
+const target=document.getElementById('list');const isWrong=location.pathname.includes('wrong-questions');const ids=JSON.parse(localStorage.getItem(isWrong?'gate_wrong':'gate_bookmarks')||'[]');target.textContent=ids.length?ids.join(', '):'No saved questions yet. Bookmarks are stored locally in this starter version.';

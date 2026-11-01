@@ -1,0 +1,3 @@
+// Replace these with your Supabase project values. Never put the service_role key here.
+window.APP_CONFIG = { SUPABASE_URL: "https://YOUR-PROJECT.supabase.co", SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_KEY" };
+window.getSupabase = function(){ if(!window.supabase || !window.APP_CONFIG || window.APP_CONFIG.SUPABASE_URL.includes("YOUR-PROJECT")) return null; return window.supabase.createClient(window.APP_CONFIG.SUPABASE_URL, window.APP_CONFIG.SUPABASE_ANON_KEY); };
