@@ -1,1 +1,36 @@
-const data=JSON.parse(sessionStorage.getItem('gate_last_exam')||'null');const out=document.getElementById('result'),review=document.getElementById('review');if(data){let score=0,correct=0;const rows=[];for(const q of data.questions){const user=data.answers[q.question_id];const expected=q.answer||[];const ua=Array.isArray(user)?user.map(String).sort():[String(user??'')];const ea=expected.map(String).sort();const ok=ua.length===ea.length&&ua.every((v,i)=>v===ea[i]);if(ok){score+=Number(q.marks||1);correct++;}else if(q.type==='MCQ'&&user)score-=Number(q.negative_marks||0);rows.push({q,user,expected,ok});}if(out)out.innerHTML=`<h3>Score: ${score.toFixed(2)}</h3><p>Correct: ${correct} / ${data.questions.length}</p>`;if(review)review.innerHTML=rows.map((r,i)=>`<article class="card"><b>Q${i+1}. ${r.q.question?.text||r.q.question_text||''}</b><p>Your answer: ${Array.isArray(r.user)?r.user.join(', '):(r.user||'Not answered')}</p><p>Correct answer: ${r.expected.join(', ')}</p><p>${r.ok?'Correct':'Incorrect'}</p></article>`).join('');}
+
+const result = JSON.parse(
+    sessionStorage.getItem("latest_exam_result") || "null"
+);
+
+if (!result) {
+    document.body.innerHTML =
+        "<h2>No submitted exam result found.</h2>";
+} else {
+    document.getElementById("score").textContent =
+        result.score;
+
+    document.getElementById("total").textContent =
+        result.total_questions;
+
+    const review = document.getElementById("review");
+
+    result.review.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "review-card";
+
+        const status = item.correct ? "Correct" : "Incorrect";
+
+        card.innerHTML = `
+            <h3>Question ${index + 1} — ${status}</h3>
+            <p>Marks awarded: ${item.marks_awarded}</p>
+        `;
+
+        const explanation = document.createElement("p");
+        explanation.textContent =
+            item.explanation || "No explanation provided.";
+
+        card.appendChild(explanation);
+        review.appendChild(card);
+    });
+}
