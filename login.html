@@ -1,1 +1,50 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login</title><link rel="stylesheet" href="css/style.css"></head><body><main class="container narrow"><section class="card"><h2>Sign in</h2><p>Use the account created by the host.</p><form id="loginForm"><label>Email<input id="email" type="email" required autocomplete="username"></label><label>Password<input id="password" type="password" required autocomplete="current-password"></label><button class="btn" type="submit">Login</button></form><p id="message" class="notice"></p><a href="index.html">Back</a></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/auth.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE ECE Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="login-container">
+    <h1>GATE ECE Portal</h1>
+    <p>Enter your student ID to continue</p>
+
+    <form id="loginForm">
+      <label for="userId">User ID</label>
+      <input
+        type="text"
+        id="userId"
+        placeholder="Example: GATE001"
+        required
+      >
+      <button type="submit">Sign In</button>
+    </form>
+
+    <p id="message"></p>
+  </main>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("userId").value.trim().toUpperCase();
+
+      if (id === "GATE001" || id === "GATE002") {
+        sessionStorage.setItem("gate_user_id", id);
+        sessionStorage.setItem("gate_role", "student");
+        window.location.href = "dashboard.html";
+      } else if (id === "ADMIN001") {
+        sessionStorage.setItem("gate_user_id", id);
+        sessionStorage.setItem("gate_role", "host");
+        window.location.href = "admin/dashboard.html";
+      } else {
+        document.getElementById("message").textContent =
+          "Invalid ID. Please check your ID.";
+      }
+    });
+  </script>
+</body>
+</html>
