@@ -1,1 +1,31 @@
-const client=getSupabase();let questions=[],answers={},index=0,seconds=3*60*60;const subject=new URLSearchParams(location.search).get('subject');const qEl=document.getElementById('question');function render(){if(!questions.length){qEl.innerHTML='<p>No questions loaded. Import questions and configure Supabase.</p>';return;}const q=questions[index];document.getElementById('qCount').textContent=`Question ${index+1} / ${questions.length}`;document.getElementById('qType').textContent=q.type;document.getElementById('marks').textContent=`${q.marks||1} mark(s)`;qEl.innerHTML='';const p=document.createElement('p');p.textContent=q.question?.text||q.question_text||'';qEl.appendChild(p);const imageUrl=q.question?.image||q.question?.circuit?.url||q.image_url;if(imageUrl){const img=document.createElement('img');img.src=imageUrl;img.className='question-image';img.alt='Question diagram';qEl.appendChild(img);}const opts=q.options||[];if(q.type==='NAT'){const input=document.createElement('input');input.type='number';input.step='any';input.placeholder='Enter numerical answer';input.value=answers[q.question_id]??'';input.oninput=()=>answers[q.question_id]=input.value;qEl.appendChild(input);}else opts.forEach(o=>{const label=document.createElement('label');label.className='option';const input=document.createElement('input');input.type=q.type==='MSQ'?'checkbox':'radio';input.name='answer';input.value=o.id;input.checked=q.type==='MSQ'?(answers[q.question_id]||[]).includes(o.id):answers[q.question_id]===o.id;input.onchange=()=>{if(q.type==='MSQ'){let a=answers[q.question_id]||[];answers[q.question_id]=input.checked?[...new Set([...a,o.id])]:a.filter(x=>x!==o.id);}else answers[q.question_id]=o.id;};label.append(input,document.createTextNode(o.text));qEl.appendChild(label);});}async function load(){if(!client){render();return;}let query=client.from('questions').select('*').limit(65);if(subject)query=query.eq('subject',subject);const {data,error}=await query;if(error){qEl.textContent=error.message;return;}questions=data||[];render();}document.getElementById('next').onclick=()=>{if(index<questions.length-1){index++;render();}};document.getElementById('prev').onclick=()=>{if(index>0){index--;render();}};document.getElementById('bookmark').onclick=()=>{const q=questions[index];if(!q)return;let b=JSON.parse(localStorage.getItem('gate_bookmarks')||'[]');if(!b.includes(q.question_id))b.push(q.question_id);localStorage.setItem('gate_bookmarks',JSON.stringify(b));document.getElementById('feedback').textContent='Bookmarked on this device.';};document.getElementById('submit').onclick=()=>{const payload={questions,answers,submittedAt:new Date().toISOString()};sessionStorage.setItem('gate_last_exam',JSON.stringify(payload));location.href='result.html';};setInterval(()=>{seconds=Math.max(0,seconds-1);const t=document.getElementById('timer');if(t)t.textContent=`${Math.floor(seconds/3600)}:${String(Math.floor(seconds%3600/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;},1000);load();
+
+async function submitExam(examId, answers) {
+    const { data: sessionData } =
+        await supabase.auth.getSession();
+
+    if (!sessionData.session) {
+        alert("Please sign in first.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const { data, error } = await supabase.rpc(
+        "submit_exam",
+        {
+            p_exam_id: examId,
+            p_answers: answers
+        }
+    );
+
+    if (error) {
+        alert("Submission failed: " + error.message);
+        return;
+    }
+
+    sessionStorage.setItem(
+        "latest_exam_result",
+        JSON.stringify(data)
+    );
+
+    window.location.href = "result.html";
+}
