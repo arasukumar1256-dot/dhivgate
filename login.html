@@ -1,122 +1,13 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GATE ECE | Student Portal</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<script src="./js/auth.js"></script>
 
-<body class="login-page">
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    <div class="login-layout">
-
-        <section class="login-left">
-            <div class="brand">
-                <div class="brand-icon">G</div>
-                <span>GATE <b>ECE</b></span>
-            </div>
-
-            <div class="hero-content">
-                <span class="hero-tag">GATE 2027 PREPARATION</span>
-
-                <h1>Prepare Smarter.<br>
-                    Perform <span>Better.</span>
-                </h1>
-
-                <p>
-                    Your personal examination platform for
-                    GATE Electronics and Communication Engineering.
-                    Practice, evaluate and improve your performance.
-                </p>
-
-                <div class="feature-list">
-                    <div>✓ 50,000+ Question Bank Support</div>
-                    <div>✓ MCQ, MSQ and NAT Practice</div>
-                    <div>✓ Performance Analytics</div>
-                    <div>✓ Mock Examination System</div>
-                </div>
-            </div>
-
-            <div class="left-footer">
-                GATE ECE Preparation Portal · 2027
-            </div>
-        </section>
-
-        <section class="login-right">
-            <div class="login-card">
-
-                <div class="login-symbol">✦</div>
-
-                <h2>Welcome Back</h2>
-                <p class="login-subtitle">
-                    Sign in using your registered ID
-                </p>
-
-                <form id="loginForm">
-                    <label for="userId">Student / Host ID</label>
-
-                    <input
-                        type="text"
-                        id="userId"
-                        placeholder="Enter your ID (e.g. GATE001)"
-                        autocomplete="username"
-                        required
-                    >
-
-                    <button type="submit" id="loginButton">
-                        Sign In <span>→</span>
-                    </button>
-
-                    <p id="message" class="login-message"></p>
-                </form>
-
-                <div class="login-divider">
-                    <span>PORTAL ACCESS</span>
-                </div>
-
-                <div class="access-info">
-                    <div>
-                        <span class="access-dot"></span>
-                        Student Access
-                    </div>
-                    <div>
-                        <span class="access-dot admin-dot"></span>
-                        Host Access
-                    </div>
-                </div>
-
-                <p class="security-note">
-                    Enter your assigned portal ID to continue.
-                </p>
-            </div>
-
-            <div class="right-footer">
-                © 2026 GATE ECE Portal. All rights reserved.
-            </div>
-        </section>
-
-    </div>
-
-    <script src="js/auth.js"></script>
-
-    <script>
-        document.getElementById("loginForm").addEventListener("submit",
-            function(event) {
-                event.preventDefault();
-
-                const id = document.getElementById("userId").value.trim();
-
-                if (typeof loginWithID === "function") {
-                    loginWithID(id);
-                } else {
-                    document.getElementById("message").textContent =
-                        "Login script not found. Check js/auth.js";
-                }
-            }
-        );
-    </script>
-
+    const id = document.getElementById("userId").value;
+    loginWithID(id);
+});
+</script>
 </body>
 </html>
