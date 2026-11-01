@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GATE ECE | Host Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f6fc;color:#17243a;font-family:Arial,sans-serif}
+header{background:#101d38;color:white;padding:22px 6%;display:flex;justify-content:space-between}
+main{max-width:1050px;margin:35px auto;padding:0 18px}
+.hero{background:linear-gradient(120deg,#142d55,#2469b5);color:white;padding:30px;border-radius:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
+.card{background:white;padding:22px;border-radius:14px;box-shadow:0 5px 20px #17243a12}
+button{background:#2469b5;color:white;border:0;padding:12px 18px;border-radius:8px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<strong>GATE ECE | HOST CONTROL PANEL</strong>
+<button onclick="logout()">Logout</button>
+</header>
+<main>
+<section class="hero">
+<h1>Host Dashboard</h1>
+<p>Manage exams, questions, diagrams and student performance.</p>
+</section>
+<section class="grid">
+<div class="card">
+<h3>Bulk Question Upload</h3>
+<p>Import your JSON question bank.</p>
+<button onclick="location.href='bulk-upload.html'">Upload</button>
+</div>
+<div class="card">
+<h3>Question Manager</h3>
+<p>Add and manage questions.</p>
+<button onclick="location.href='question-manager.html'">Manage</button>
+</div>
+<div class="card">
+<h3>Diagram Manager</h3>
+<p>Manage circuits and diagrams.</p>
+<button onclick="location.href='diagram-manager.html'">Open</button>
+</div>
+<div class="card">
+<h3>Exam Manager</h3>
+<p>Create and publish examinations.</p>
+<button onclick="location.href='exam-manager.html'">Manage Exams</button>
+</div>
+<div class="card">
+<h3>Student Results</h3>
+<p>View student scores and performance.</p>
+<button onclick="location.href='student-results.html'">View Results</button>
+</div>
+</section>
+</main>
+<script>
+const id=sessionStorage.getItem("gate_user_id");
+const role=sessionStorage.getItem("gate_role");
+
+if(id!=="ADMIN001" || role!=="host"){
+  location.replace("../login.html");
+}
+function logout(){
+  sessionStorage.clear();
+  location.href="../login.html";
+}
+</script>
+</body>
+</html>
